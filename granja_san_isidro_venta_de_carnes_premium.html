@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Granja San Isidro | Carnes Premium y Ganado Selecto</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        amberGold: {
+                            500: '#d97706',
+                            600: '#b45309',
+                        },
+                        meatRed: {
+                            600: '#991b1b',
+                            700: '#7f1d1d',
+                        },
+                        whatsappGreen: {
+                            500: '#25D366',
+                            600: '#1EBE5D'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Fondo con la imagen de la granja proporcionada y gradiente de capa oscura para legibilidad perfecta */
+        body {
+            background-image: linear-gradient(rgba(10, 8, 6, 0.82), rgba(15, 12, 10, 0.90)), url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .glass-panel {
+            background: rgba(20, 16, 14, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(217, 119, 6, 0.15);
+        }
+        .glass-nav {
+            background: rgba(12, 10, 8, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(217, 119, 6, 0.2);
+        }
+    </style>
+</head>
+<body class="text-gray-100 font-sans antialiased min-h-screen flex flex-col selection:bg-amber-600 selection:text-white">
+
+    <!-- Navegación Fija Moderna -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-800 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-amber-900/40">
+                    <i class="fa-solid fa-cow"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight text-white block">SAN ISIDRO</span>
+                    <span class="text-xs text-amber-500 font-semibold tracking-widest uppercase">Carnes & Ganado Selecto</span>
+                </div>
+            </div>
+
+            <!-- Menú central -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#inicio" class="text-gray-300 hover:text-amber-400 transition">Inicio</a>
+                <a href="#catalogo" class="text-gray-300 hover:text-amber-400 transition">Cortes Premium</a>
+                <a href="#trazabilidad" class="text-gray-300 hover:text-amber-400 transition">Trazabilidad</a>
+                <a href="#contacto" class="text-gray-300 hover:text-amber-400 transition">Contacto</a>
+            </nav>
+
+            <!-- Acciones derecha -->
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleCart()" class="relative bg-zinc-900/90 hover:bg-zinc-800 p-2.5 rounded-2xl text-white transition border border-amber-600/30 flex items-center justify-center w-12 h-12 focus:outline-none shadow-lg">
+                    <i class="fa-solid fa-shopping-bag text-lg text-amber-500"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-amber-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-md scale-0 transition-transform duration-300">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-grow pt-24">
+        
+        <!-- Sección Hero -->
+        <section id="inicio" class="relative py-20 lg:py-32 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-amber-950/60 border border-amber-700/40 text-amber-400 text-xs font-semibold tracking-wide uppercase">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+                            <span>Ganado 100% de Exportación y Pastoreo Libre</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                            La Máxima Expresión del Sabor <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">de la Granja a su Mesa</span>
+                        </h1>
+                        <p class="text-lg text-gray-300 max-w-2xl leading-relaxed">
+                            Selección exclusiva de res Angus/Brahman, cerdo Duroc y pollo campestre. Cortes con marmoleo superior, madurados en frío y empacados al vacío para garantizar ternura y calidad insuperable.
+                        </p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                            <a href="#catalogo" class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold shadow-xl shadow-amber-900/40 transition transform hover:-translate-y-0.5">
+                                Ver Catálogo y Precios <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                            <a href="https://wa.me/573000000000?text=Hola,%20deseo%20asesoría%20sobre%20cortes%20finos%20de%20carne" target="_blank" class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-zinc-900/90 hover:bg-zinc-800 text-white font-bold border border-zinc-700 transition">
+                                <i class="fa-brands fa-whatsapp text-whatsappGreen-500 text-xl mr-2"></i> Asesoría WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5">
+                        <div class="glass-panel p-6 rounded-3xl shadow-2xl relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 bg-amber-600 text-white text-xs font-extrabold px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider shadow-md">Especialidad</div>
+                            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=800&auto=format&fit=crop" alt="Corte Ribeye Angus" class="w-full h-64 object-cover rounded-2xl mb-4 group-hover:scale-105 transition duration-500">
+                            <h3 class="text-xl font-bold text-white mb-1">Ribeye Angus Grado Premium</h3>
+                            <p class="text-sm text-gray-300 mb-4">Infiltración de grasa intramuscular superior, jugosidad extrema para parrilladas exigentes.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-black text-amber-400">$68.000 <span class="text-xs text-gray-400 font-normal">/ 500g</span></span>
+                                <button onclick="quickAdd('Ribeye Angus', 68000, 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=800&auto=format&fit=crop')" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center shadow-md">
+                                    <i class="fa-solid fa-plus mr-1"></i> Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Catálogo de Cortes -->
+        <section id="catalogo" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">Nuestros Cortes y Ganado Selecto</h2>
+                    <p class="text-gray-300 text-base">Explore la máxima calidad en carnes de res, cerdo y pollo con trazabilidad garantizada desde nuestra granja.</p>
+                    
+                    <!-- Botones de Filtrado -->
+                    <div class="flex flex-wrap justify-center gap-3 mt-8">
+                        <button onclick="filterProducts('all')" class="filter-btn px-6 py-3 rounded-2xl text-sm font-bold bg-amber-600 text-white transition shadow-lg shadow-amber-900/40" data-filter="all">Todos los Productos</button>
+                        <button onclick="filterProducts('res')" class="filter-btn px-6 py-3 rounded-2xl text-sm font-bold bg-zinc-900/80 text-gray-300 hover:bg-zinc-800 transition border border-zinc-800" data-filter="res">Res Selecta</button>
+                        <button onclick="filterProducts('cerdo')" class="filter-btn px-6 py-3 rounded-2xl text-sm font-bold bg-zinc-900/80 text-gray-300 hover:bg-zinc-800 transition border border-zinc-800" data-filter="cerdo">Cerdo Duroc</button>
+                        <button onclick="filterProducts('pollo')" class="filter-btn px-6 py-3 rounded-2xl text-sm font-bold bg-zinc-900/80 text-gray-300 hover:bg-zinc-800 transition border border-zinc-800" data-filter="pollo">Pollo Campestre</button>
+                    </div>
+                </div>
+
+                <!-- Grid de Productos -->
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Producto 1 -->
+                    <div class="product-card glass-panel rounded-3xl overflow-hidden flex flex-col transition duration-300 hover:-translate-y-1 hover:border-amber-500/50 shadow-xl" data-category="res">
+                        <div class="relative h-60 overflow-hidden">
+                            <span class="absolute top-3 left-3 z-10 bg-black/70 backdrop-blur-md text-amber-400 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Res Selecta</span>
+                            <img src="https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=800&auto=format&fit=crop" alt="Churrasco Angus" class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white mb-2">Churrasco Angus Premium</h3>
+                            <p class="text-sm text-gray-300 mb-6 flex-grow">Corte magro con veteado perfecto ideal para parrilla y término medio.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-zinc-800/80">
+                                <div>
+                                    <span class="text-xs text-gray-400 block">Precio por 500g</span>
+                                    <span class="text-xl font-extrabold text-white">$55.000</span>
+                                </div>
+                                <button onclick="addToCart('Churrasco Angus Premium', 55000, 'https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=800&auto=format&fit=crop')" class="bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-2xl font-medium transition flex items-center justify-center w-12 h-12 shadow-lg shadow-amber-900/40">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="product-card glass-panel rounded-3xl overflow-hidden flex flex-col transition duration-300 hover:-translate-y-1 hover:border-amber-500/50 shadow-xl" data-category="res">
+                        <div class="relative h-60 overflow-hidden">
+                            <span class="absolute top-3 left-3 z-10 bg-black/70 backdrop-blur-md text-amber-400 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Res Selecta</span>
+                            <img src="https://images.unsplash.com/photo-1615937657715-bc7b41996ae9?q=80&w=800&auto=format&fit=crop" alt="Tomahawk" class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white mb-2">Tomahawk Steak de Res</h3>
+                            <p class="text-sm text-gray-300 mb-6 flex-grow">Corte imponente con hueso largo, máxima suavidad y sabor inigualable.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-zinc-800/80">
+                                <div>
+                                    <span class="text-xs text-gray-400 block">Precio por 1000g</span>
+                                    <span class="text-xl font-extrabold text-white">$95.000</span>
+                                </div>
+                                <button onclick="addToCart('Tomahawk Steak de Res', 95000, 'https://images.unsplash.com/photo-1615937657715-bc7b41996ae9?q=80&w=800&auto=format&fit=crop')" class="bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-2xl font-medium transition flex items-center justify-center w-12 h-12 shadow-lg shadow-amber-900/40">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="product-card glass-panel rounded-3xl overflow-hidden flex flex-col transition duration-300 hover:-translate-y-1 hover:border-amber-500/50 shadow-xl" data-category="cerdo">
+                        <div class="relative h-60 overflow-hidden">
+                            <span class="absolute top-3 left-3 z-10 bg-black/70 backdrop-blur-md text-amber-400 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Cerdo Duroc</span>
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" alt="Costillas BBQ" class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white mb-2">Costillas de Cerdo San Isidro</h3>
+                            <p class="text-sm text-gray-300 mb-6 flex-grow">Cortes tiernos de cerdo Duroc con carne jugosa perfecta para ahumados.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-zinc-800/80">
+                                <div>
+                                    <span class="text-xs text-gray-400 block">Precio por 800g</span>
+                                    <span class="text-xl font-extrabold text-white">$42.000</span>
+                                </div>
+                                <button onclick="addToCart('Costillas de Cerdo San Isidro', 42000, 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop')" class="bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-2xl font-medium transition flex items-center justify-center w-12 h-12 shadow-lg shadow-amber-900/40">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 4 -->
+                    <div class="product-card glass-panel rounded-3xl overflow-hidden flex flex-col transition duration-300 hover:-translate-y-1 hover:border-amber-500/50 shadow-xl" data-category="cerdo">
+                        <div class="relative h-60 overflow-hidden">
+                            <span class="absolute top-3 left-3 z-10 bg-black/70 backdrop-blur-md text-amber-400 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Cerdo Duroc</span>
+                            <img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=800&auto=format&fit=crop" alt="Lomo de Cerdo" class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white mb-2">Lomo Fino de Cerdo</h3>
+                            <p class="text-sm text-gray-300 mb-6 flex-grow">Corte magro y suave, seleccionado para preparaciones gourmet y asados.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-zinc-800/80">
+                                <div>
+                                    <span class="text-xs text-gray-400 block">Precio por 500g</span>
+                                    <span class="text-xl font-extrabold text-white">$38.000</span>
+                                </div>
+                                <button onclick="addToCart('Lomo Fino de Cerdo', 38000, 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=800&auto=format&fit=crop')" class="bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-2xl font-medium transition flex items-center justify-center w-12 h-12 shadow-lg shadow-amber-900/40">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 5 -->
+                    <div class="product-card glass-panel rounded-3xl overflow-hidden flex flex-col transition duration-300 hover:-translate-y-1 hover:border-amber-500/50 shadow-xl" data-category="pollo">
+                        <div class="relative h-60 overflow-hidden">
+                            <span class="absolute top-3 left-3 z-10 bg-black/70 backdrop-blur-md text-amber-400 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Pollo Campestre</span>
+                            <img src="https://images.unsplash.com/photo-1587593810167-a84920ea0781?q=80&w=800&auto=format&fit=crop" alt="Pollo Entero Campestre" class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white mb-2">Pollo Entero Campestre Orgánico</h3>
+                            <p class="text-sm text-gray-300 mb-6 flex-grow">Crianza natural sin hormonas, carne firme, jugosa y de piel dorada crujiente.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-zinc-800/80">
+                                <div>
+                                    <span class="text-xs text-gray-400 block">Precio unidad (apx 2kg)</span>
+                                    <span class="text-xl font-extrabold text-white">$32.000</span>
+                                </div>
+                                <button onclick="addToCart('Pollo Entero Campestre Orgánico', 32000, 'https://images.unsplash.com/photo-1587593810167-a84920ea0781?q=80&w=800&auto=format&fit=crop')" class="bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-2xl font-medium transition flex items-center justify-center w-12 h-12 shadow-lg shadow-amber-900/40">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 6 -->
+                    <div class="product-card glass-panel rounded-3xl overflow-hidden flex flex-col transition duration-300 hover:-translate-y-1 hover:border-amber-500/50 shadow-xl" data-category="pollo">
+                        <div class="relative h-60 overflow-hidden">
+                            <span class="absolute top-3 left-3 z-10 bg-black/70 backdrop-blur-md text-amber-400 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Pollo Campestre</span>
+                            <img src="https://images.unsplash.com/photo-1604908176997-125f2596f3c8?q=80&w=800&auto=format&fit=crop" alt="Pechugas de Pollo" class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white mb-2">Pechuga Deshuesada Premium</h3>
+                            <p class="text-sm text-gray-300 mb-6 flex-grow">Filetes limpios y frescos de pollo campestre, empacados al vacío.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-zinc-800/80">
+                                <div>
+                                    <span class="text-xs text-gray-400 block">Precio por 1000g</span>
+                                    <span class="text-xl font-extrabold text-white">$26.000</span>
+                                </div>
+                                <button onclick="addToCart('Pechuga Deshuesada Premium', 26000, 'https://images.unsplash.com/photo-1604908176997-125f2596f3c8?q=80&w=800&auto=format&fit=crop')" class="bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-2xl font-medium transition flex items-center justify-center w-12 h-12 shadow-lg shadow-amber-900/40">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Trazabilidad -->
+        <section id="trazabilidad" class="py-20 bg-black/50 border-y border-amber-600/20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <span class="text-amber-500 font-bold text-sm tracking-widest uppercase">Calidad Certificada</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">De Nuestra Granja Sostenible Hasta Su Cocina</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            En Granja San Isidro controlamos cada fase: desde la alimentación de nuestro ganado en praderas naturales hasta los rigurosos procesos de cadena de frío y empaque al vacío con estándares internacionales.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6 pt-4">
+                            <div class="glass-panel p-6 rounded-3xl">
+                                <div class="text-amber-500 text-3xl font-black mb-1">100%</div>
+                                <div class="text-sm text-gray-300">Alimentación natural a pasto</div>
+                            </div>
+                            <div class="glass-panel p-6 rounded-3xl">
+                                <div class="text-amber-500 text-3xl font-black mb-1">-2°C</div>
+                                <div class="text-sm text-gray-300">Cadena de frío ininterrumpida</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="glass-panel p-4 rounded-3xl">
+                            <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?q=80&w=1000&auto=format&fit=crop" alt="Granja San Isidro" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Contacto -->
+        <section id="contacto" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="glass-panel p-8 sm:p-12 rounded-3xl max-w-4xl mx-auto text-center space-y-6 shadow-2xl">
+                    <h2 class="text-3xl font-extrabold text-white">¿Desea pedidos institucionales o asesoría personalizada?</h2>
+                    <p class="text-gray-300 max-w-xl mx-auto">Comuníquese directamente con nuestros asesores comerciales por WhatsApp para coordinar despachos especiales o cortes a la medida.</p>
+                    <a href="https://wa.me/573000000000?text=Hola,%20quisiera%20más%20información%20sobre%20pedidos%20de%20carne" target="_blank" class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-whatsappGreen-500 hover:bg-whatsappGreen-600 text-white font-bold text-base shadow-xl shadow-whatsappGreen-500/30 transition transform hover:scale-105">
+                        <i class="fa-brands fa-whatsapp text-2xl mr-3"></i> Chatear con Asesor WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer & Térmicos Legales -->
+    <footer class="bg-black/90 border-t border-amber-600/20 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="space-y-4 md:col-span-2">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-xl bg-amber-600 flex items-center justify-center text-white font-bold">
+                            <i class="fa-solid fa-cow text-sm"></i>
+                        </div>
+                        <span class="text-lg font-bold text-white tracking-wider">GRANJA SAN ISIDRO</span>
+                    </div>
+                    <p class="text-sm text-gray-400 max-w-md">
+                        Ganadería sostenible y producción de carne bovina, porcina y avícola de alta calidad con estándares internacionales de inocuidad y sabor.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Enlaces</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#inicio" class="hover:text-white transition">Inicio</a></li>
+                        <li><a href="#catalogo" class="hover:text-white transition">Cortes Premium</a></li>
+                        <li><a href="#trazabilidad" class="hover:text-white transition">Trazabilidad</a></li>
+                        <li><a href="#contacto" class="hover:text-white transition">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Métodos de Pago</h4>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="px-3 py-1.5 rounded-lg bg-zinc-900 text-purple-400 font-bold border border-purple-500/30">Nequi</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-zinc-900 text-blue-400 font-bold border border-blue-500/30">PSE</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-zinc-900 text-amber-400 font-bold border border-amber-500/30">Tarjetas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-zinc-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs space-y-4 sm:space-y-0">
+                <p>&copy; 2026 Granja San Isidro. Todos los derechos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" onclick="openModal('terminos')" class="hover:text-white transition underline">Términos y Condiciones</a>
+                    <a href="#" onclick="openModal('privacidad')" class="hover:text-white transition underline">Política de Privacidad</a>
+                    <a href="#" onclick="openModal('legal')" class="hover:text-white transition underline">Aviso Legal Sanitario</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Flotante Oficial WhatsApp -->
+    <a href="https://wa.me/573000000000?text=Hola,%20deseo%20realizar%20un%20pedido%20de%20carnes" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#1EBE5D] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl transition transform hover:scale-110 focus:outline-none" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Panel Lateral del Carrito -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md glass-panel bg-zinc-950/95 border-l border-amber-600/30 shadow-2xl flex flex-col">
+                <div class="p-6 border-b border-zinc-800 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-shopping-bag text-amber-500 text-lg"></i>
+                        <h3 class="text-lg font-bold text-white">Su Carrito de Compras</h3>
+                    </div>
+                    <button onclick="toggleCart()" class="text-gray-400 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+                <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4">
+                    <p class="text-gray-400 text-center py-12">Su carrito está vacío</p>
+                </div>
+                <div class="p-6 border-t border-zinc-800 bg-zinc-900/60 space-y-4">
+                    <div class="flex justify-between items-center text-lg font-bold">
+                        <span class="text-gray-300">Total a Pagar:</span>
+                        <span id="cart-total" class="text-amber-400">$0</span>
+                    </div>
+                    <button onclick="openCheckout()" id="checkout-btn" disabled class="w-full py-4 rounded-2xl bg-amber-600 hover:bg-amber-700 disabled:bg-zinc-800 disabled:text-zinc-500 text-white font-bold transition shadow-lg shadow-amber-900/30">
+                        Proceder al Pago Seguro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout Nequi / PSE -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeCheckout()"></div>
+        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 sm:p-8 relative z-10 space-y-6 max-h-[90vh] overflow-y-auto border border-amber-600/30">
+            <div class="flex justify-between items-center border-b border-zinc-800 pb-4">
+                <h3 class="text-xl font-bold text-white">Pasarela de Pagos Seguros</h3>
+                <button onclick="closeCheckout()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <div class="space-y-3">
+                <label class="block text-sm font-semibold text-gray-300">Seleccione Método de Pago:</label>
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="border border-zinc-700 hover:border-purple-500 p-4 rounded-2xl flex flex-col items-center cursor-pointer transition bg-zinc-900/80 has-[:checked]:border-purple-500 has-[:checked]:bg-purple-950/20">
+                        <input type="radio" name="payment_method" value="nequi" checked class="mb-2 accent-purple-600" onchange="switchPaymentMethod('nequi')">
+                        <span class="font-bold text-white text-sm">Nequi</span>
+                        <span class="text-xs text-purple-400 font-medium">Billetera Digital</span>
+                    </label>
+                    <label class="border border-zinc-700 hover:border-blue-500 p-4 rounded-2xl flex flex-col items-center cursor-pointer transition bg-zinc-900/80 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-950/20">
+                        <input type="radio" name="payment_method" value="pse" class="mb-2 accent-blue-600" onchange="switchPaymentMethod('pse')">
+                        <span class="font-bold text-white text-sm">PSE</span>
+                        <span class="text-xs text-blue-400 font-medium">Débito Bancario</span>
+                    </label>
+                </div>
+            </div>
+
+            <form id="payment-form" onsubmit="processPayment(event)" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-gray-400">Nombre Completo</label>
+                    <input type="text" required class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-amber-500" placeholder="Ej. Carlos Mendoza">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-gray-400">Correo Electrónico</label>
+                    <input type="email" required class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-amber-500" placeholder="carlos@correo.com">
+                </div>
+                
+                <div id="nequi-fields" class="space-y-1">
+                    <label class="text-xs font-semibold text-gray-400">Número Celular Nequi</label>
+                    <input type="tel" id="nequi-phone" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-500" placeholder="300 123 4567">
+                </div>
+
+                <div id="pse-fields" class="space-y-1 hidden">
+                    <label class="text-xs font-semibold text-gray-400">Seleccione su Banco</label>
+                    <select id="pse-bank" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500">
+                        <option value="bancolombia">Bancolombia</option>
+                        <option value="davivienda">Davivienda</option>
+                        <option value="bbva">BBVA Colombia</option>
+                        <option value="nequi_pse">Nequi / Davplata</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-gray-400">Dirección de Entrega</label>
+                    <input type="text" required class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-amber-500" placeholder="Calle 100 # 15-20, Apto 302">
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold transition shadow-lg shadow-amber-900/40 mt-4">
+                    Autorizar Pago de <span id="modal-total">$0</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Términos Legales -->
+    <div id="legal-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeModal()"></div>
+        <div class="glass-panel w-full max-w-2xl rounded-3xl p-6 sm:p-8 relative z-10 space-y-4 max-h-[85vh] overflow-y-auto border border-amber-600/30">
+            <div class="flex justify-between items-center border-b border-zinc-800 pb-3">
+                <h3 id="modal-title" class="text-xl font-bold text-white">Términos y Condiciones</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div id="modal-content" class="text-sm text-gray-300 space-y-3 leading-relaxed"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notificación -->
+    <div id="toast" class="fixed bottom-24 right-6 z-50 bg-zinc-900 text-white px-6 py-3 rounded-2xl shadow-2xl border border-amber-600/30 flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="w-6 h-6 rounded-full bg-green-600 flex items-center justify-center text-white text-xs">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <span id="toast-message" class="text-sm font-medium">Producto añadido al carrito</span>
+    </div>
+
+    <!-- JavaScript Interactivo -->
+    <script>
+        let cart = [];
+
+        function toggleCart() {
+            document.getElementById('cart-drawer').classList.toggle('hidden');
+        }
+
+        function addToCart(name, price, image) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ name, price, image, quantity: 1 });
+            }
+            updateCartUI();
+            showToast(`${name} agregado al carrito`);
+        }
+
+        function quickAdd(name, price, image) {
+            addToCart(name, price, image);
+            toggleCart();
+        }
+
+        function updateQuantity(name, delta) {
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.name !== name);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            const badge = document.getElementById('cart-badge');
+            const totalEl = document.getElementById('cart-total');
+            const modalTotal = document.getElementById('modal-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            let totalCount = 0;
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-gray-400 text-center py-12">Su carrito está vacío</p>';
+                checkoutBtn.disabled = true;
+            } else {
+                checkoutBtn.disabled = false;
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center space-x-4 bg-zinc-900/80 p-3 rounded-2xl border border-zinc-800">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl">
+                        <div class="flex-grow">
+                            <h4 class="text-sm font-bold text-white line-clamp-1">${item.name}</h4>
+                            <span class="text-xs text-amber-400 font-semibold">$${item.price.toLocaleString()}</span>
+                            <div class="flex items-center space-x-2 mt-2">
+                                <button onclick="updateQuantity('${item.name}', -1)" class="w-6 h-6 rounded-lg bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center text-xs">-</button>
+                                <span class="text-xs font-bold">${item.quantity}</span>
+                                <button onclick="updateQuantity('${item.name}', 1)" class="w-6 h-6 rounded-lg bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center text-xs">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            cart.forEach(item => {
+                totalCount += item.quantity;
+                totalPrice += item.price * item.quantity;
+            });
+
+            if (totalCount > 0) {
+                badge.innerText = totalCount;
+                badge.classList.remove('scale-0');
+            } else {
+                badge.classList.add('scale-0');
+            }
+
+            totalEl.innerText = `$${totalPrice.toLocaleString()}`;
+            modalTotal.innerText = `$${totalPrice.toLocaleString()}`;
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        function filterProducts(category) {
+            const cards = document.querySelectorAll('.product-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.classList.remove('bg-zinc-900/80', 'text-gray-300');
+                    btn.classList.add('bg-amber-600', 'text-white', 'shadow-lg', 'shadow-amber-900/40');
+                } else {
+                    btn.classList.remove('bg-amber-600', 'text-white', 'shadow-lg', 'shadow-amber-900/40');
+                    btn.classList.add('bg-zinc-900/80', 'text-gray-300');
+                }
+            });
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openCheckout() {
+            toggleCart();
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function switchPaymentMethod(method) {
+            const nequiFields = document.getElementById('nequi-fields');
+            const pseFields = document.getElementById('pse-fields');
+            if (method === 'nequi') {
+                nequiFields.classList.remove('hidden');
+                pseFields.classList.add('hidden');
+            } else {
+                nequiFields.classList.add('hidden');
+                pseFields.classList.remove('hidden');
+            }
+        }
+
+        function processPayment(e) {
+            e.preventDefault();
+            closeCheckout();
+            cart = [];
+            updateCartUI();
+            showToast('¡Pago procesado con éxito! Pedido confirmado.');
+        }
+
+        function openModal(type) {
+            const modal = document.getElementById('legal-modal');
+            const title = document.getElementById('modal-title');
+            const content = document.getElementById('modal-content');
+
+            if (type === 'terminos') {
+                title.innerText = 'Términos y Condiciones';
+                content.innerHTML = `
+                    <p>1. <strong>Aceptación:</strong> Al realizar un pedido en Granja San Isidro, usted acepta los estándares de calidad y conservación en frío de nuestros productos cárnicos.</p>
+                    <p>2. <strong>Envíos:</strong> Garantizamos la cadena de frío mediante vehículos refrigerados certificados.</p>
+                    <p>3. <strong>Devoluciones:</strong> Por tratarse de productos perecederos, cualquier reclamación debe realizarse dentro de las primeras 2 horas posteriores a la recepción.</p>
+                `;
+            } else if (type === 'privacidad') {
+                title.innerText = 'Política de Privacidad';
+                content.innerHTML = `
+                    <p>1. <strong>Protección de Datos:</strong> Sus datos personales y bancarios ingresados mediante pasarelas como Nequi o PSE están protegidos bajo protocolos de cifrado.</p>
+                    <p>2. <strong>Uso de Información:</strong> La información recolectada se utiliza exclusivamente para procesar entregas y notificar el estado de su pedido.</p>
+                `;
+            } else {
+                title.innerText = 'Aviso Legal Sanitario';
+                content.innerHTML = `
+                    <p>1. <strong>Normativa Sanitaria:</strong> Granja San Isidro cumple rigurosamente con la normatividad sanitaria vigente para beneficio animal, faenamiento y distribución.</p>
+                    <p>2. <strong>Conservación:</strong> Manténgase refrigerado entre 0°C y 4°C o congelado a -18°C.</p>
+                `;
+            }
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('legal-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
